@@ -21,7 +21,7 @@ services:
         stdin_open: true
         tty: true
         build: ./
-        image: test_celery:latest
+        image: celery-with-docker-compose:latest
         volumes:
             - ./app:/deploy/app
         ports:
@@ -29,7 +29,7 @@ services:
         command: ["/bin/bash"]
 
     celeryworker:
-        image: test_celery:latest
+        image: celery-with-docker-compose:latest
         volumes:
             - ./app:/deploy/app
         command: ['celery', '-A', 'tasks', 'worker', '-c', '4', '--loglevel', 'info']
