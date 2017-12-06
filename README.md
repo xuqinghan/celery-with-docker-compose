@@ -11,8 +11,8 @@ celeryworker_1  | Trying again in 4.00 seconds...
 create celery with host IP instead of "localhost" or "rabbitmq's hostname" in docker-compose.yml
 
 
-```from celery import Celery
-
+```
+from celery import Celery
 
 #celery worker in docker-compose  cant connect to "localhost" or "hostname" in dockercompose.yml
 
