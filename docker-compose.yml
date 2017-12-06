@@ -1,0 +1,55 @@
+# Use postgres/example user/password credentials
+version: '3.4'
+
+services:
+    rabbitmq:
+        #restart: always
+        #build: rabbitmq/
+        image: rabbitmq:3-management
+        hostname: rabbit1
+        environment:
+            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            # RABBITMQ_DEFAULT_USER: "guest"
+            # RABBITMQ_DEFAULT_PASS: "guest"
+            # RABBITMQ_DEFAULT_VHOST: "/"
+        ports:
+            - "15672:15672"
+            - "5672:5672"
+
+    api:
+        #restart: always
+        stdin_open: true
+        tty: true
+        build: ./
+        image: test_celery:latest
+        volumes:
+            - ./app:/deploy/app
+        ports:
+            - "80:80"
+        command: ["/bin/bash"]
+
+    celeryworker:
+        image: test_celery:latest
+        volumes:
+            - ./app:/deploy/app
+        command: ['celery', '-A', 'tasks', 'worker', '-c', '4', '--loglevel', 'info']
+        depends_on:
+            - rabbitmq
+
+
+    # redis:
+    #     image: redis:3.2.6
+
+    # db:
+    #     image: postgres
+    #     restart: always
+    #     environment:
+    #         POSTGRES_PASSWORD: example
+    #     volumes:
+    #         - /home/db/postgres:/var/lib/postgresql/data
+
+    # adminer:
+    #     image: adminer
+    #     restart: always
+    #     ports:
+    #         - 8080:8080

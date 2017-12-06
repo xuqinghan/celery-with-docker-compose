@@ -1,11 +1,4 @@
-# celery-with-docker-compose
-run celery 4.1 worker and rabbitmq with docker-compose v3
-
-create celery with host IP instead of "localhost" or "rabbitmq's hostname" in docker-compose.yml
-
-
-
-```from celery import Celery
+from celery import Celery
 
 
 #celery worker in docker-compose  cant connect to "localhost" or "hostname" in dockercompose.yml
@@ -23,4 +16,3 @@ app = Celery(backend = 'rpc://', broker = 'amqp://guest:guest@{0}:5672/'.format(
 @app.task
 def add(x, y):
     return x + y
-```
