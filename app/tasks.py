@@ -6,12 +6,14 @@ from celery import Celery
 #app = Celery(backend='amqp', broker='amqp://guest:guest@localhost:5672/')
 
 
-HOST_IP = '192.168.239.129' # ip of host(run docker-compose) 
-app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(HOST_IP))
+# can work both from docker container or host
+# HOST_IP = '192.168.239.129' # ip of host(run docker-compose) 
+# app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(HOST_IP))
 
-# cant work from docker
-# HOST_NAME = 'rabbit-taiga' 
-# app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(HOST_NAME))
+# SERVICE_NAME is not the SERVICE's hostname
+#  can work in docker but not work_from host
+SERVICE_NAME = 'myrabbit' 
+app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(SERVICE_NAME))
 
 
 #app = Celery(backend='amqp', broker='amqp://guest:guest@localhost:5672/')

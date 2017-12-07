@@ -2,11 +2,11 @@
 version: '3.4'
 
 services:
-    rabbitmq:
+    myrabbit:
         #restart: always
         #build: rabbitmq/
         image: rabbitmq:3-management
-        hostname: rabbit-taiga
+        # hostname: rabbit-taiga
         environment:
             RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
             # RABBITMQ_DEFAULT_USER: "guest"
@@ -17,7 +17,7 @@ services:
             RABBITMQ_DEFAULT_PASS: taiga
         ports:
             - "15672:15672"
-            - "5672:5672"
+            # - "5672:5672"
 
     api:
         #restart: always
@@ -37,7 +37,7 @@ services:
             - ./app:/deploy/app
         command: ['celery', '-A', 'tasks', 'worker', '-c', '4', '--loglevel', 'info']
         depends_on:
-            - rabbitmq
+            - myrabbit
 
 
     # redis:
