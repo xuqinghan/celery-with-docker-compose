@@ -16,9 +16,6 @@ SERVICE_NAME = 'myrabbit'
 app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(SERVICE_NAME))
 
 
-#app = Celery(backend='amqp', broker='amqp://guest:guest@localhost:5672/')
-# app = Celery('tasks', backend = 'amqp', broker = 'pyamqp://guest:guest@localhost//')
-
 
 @app.task
 def add(x, y):
