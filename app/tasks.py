@@ -7,7 +7,12 @@ from celery import Celery
 
 
 HOST_IP = '192.168.239.129' # ip of host(run docker-compose) 
-app = Celery(backend = 'rpc://', broker = 'amqp://guest:guest@{0}:5672/'.format(HOST_IP))
+app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(HOST_IP))
+
+# cant work from docker
+# HOST_NAME = 'rabbit-taiga' 
+# app = Celery(backend = 'rpc://', broker = 'amqp://taiga:taiga@{0}:5672/'.format(HOST_NAME))
+
 
 #app = Celery(backend='amqp', broker='amqp://guest:guest@localhost:5672/')
 # app = Celery('tasks', backend = 'amqp', broker = 'pyamqp://guest:guest@localhost//')

@@ -6,12 +6,15 @@ services:
         #restart: always
         #build: rabbitmq/
         image: rabbitmq:3-management
-        hostname: rabbit1
+        hostname: rabbit-taiga
         environment:
-            RABBITMQ_ERLANG_COOKIE: "SWQOKODSQALRPCLNMEQG"
+            RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
             # RABBITMQ_DEFAULT_USER: "guest"
             # RABBITMQ_DEFAULT_PASS: "guest"
             # RABBITMQ_DEFAULT_VHOST: "/"
+            # RABBITMQ_NODENAME: taiga
+            RABBITMQ_DEFAULT_USER: taiga
+            RABBITMQ_DEFAULT_PASS: taiga
         ports:
             - "15672:15672"
             - "5672:5672"
